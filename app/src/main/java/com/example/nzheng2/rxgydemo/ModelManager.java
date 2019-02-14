@@ -13,7 +13,8 @@ public class ModelManager {
                 new TieredLandingPagePayload.Explaination("2", "Ride",
                         "Ride this week to unlock next week's saving.");
         TieredLandingPagePayload.Explaination e3 =
-                new TieredLandingPagePayload.Explaination("3", "Ride",
+                new TieredLandingPagePayload.Explaination("3" +
+                        "", "Ride",
                         "Ride this week to unlock next week's saving.");
         TieredLandingPagePayload.TierBadgeInfo b1 = new TieredLandingPagePayload.TierBadgeInfo(50, 100, 5, "15% off", "", "Rides", "5/10");
         TieredLandingPagePayload.TierBadgeInfo b2 = new TieredLandingPagePayload.TierBadgeInfo(50, 100, 5, "15% off", "", "Rides", "5/10");

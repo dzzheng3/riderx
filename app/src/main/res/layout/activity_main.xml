@@ -8,8 +8,8 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:descendantFocusability="blocksDescendants"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants">
 
         <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view"
@@ -71,11 +71,23 @@
                     card_view:layout_constraintStart_toStartOf="parent"
                     card_view:layout_constraintTop_toBottomOf="@+id/card_description_text">
 
-                    <LinearLayout
-                        android:id="@+id/ll_badge_container"
+                    <FrameLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"></LinearLayout>
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_empty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/empty"
+                            android:visibility="invisible" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_badge_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"></LinearLayout>
+                    </FrameLayout>
                 </HorizontalScrollView>
             </android.support.constraint.ConstraintLayout>
 

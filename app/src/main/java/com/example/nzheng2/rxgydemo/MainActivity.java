@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvCTA;
     private RecyclerView rv;
     private LinearLayout llBadgeContainer;
+    private ImageView ivEmpty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         tvCTA = findViewById(R.id.tv_cta);
         rv = findViewById(R.id.rv);
         llBadgeContainer = findViewById(R.id.ll_badge_container);
+        ivEmpty = findViewById(R.id.iv_empty);
     }
 
     private void bindData(TieredLandingPagePayload payload) {
@@ -82,8 +85,13 @@ public class MainActivity extends AppCompatActivity {
         tvCTA.setText(payload.ctaText);
 
         List<TieredLandingPagePayload.TierBadgeInfo> feedTierList = payload.feedTierList;
-        for(TieredLandingPagePayload.TierBadgeInfo badgeInfo: feedTierList){
-            llBadgeContainer.addView(getMedalView(feedTierList.size()));
+        if(feedTierList == null || feedTierList.size() == 0){
+            ivEmpty.setVisibility(View.VISIBLE);
+        }else {
+            ivEmpty.setVisibility(View.INVISIBLE);
+            for(TieredLandingPagePayload.TierBadgeInfo badgeInfo: feedTierList){
+                llBadgeContainer.addView(getMedalView(feedTierList.size()));
+            }
         }
 
         RvAdapter rvAdapter = new RvAdapter();
