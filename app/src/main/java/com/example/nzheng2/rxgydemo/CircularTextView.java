@@ -16,25 +16,32 @@ public class CircularTextView extends TextView {
 
     public CircularTextView(Context context) {
         super(context);
+        init();
     }
 
     public CircularTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public CircularTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init() {
         circlePaint = new Paint();
-        circlePaint.setColor(solidColor);
         circlePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
 
         strokePaint = new Paint();
-        strokePaint.setColor(strokeColor);
         strokePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
     }
 
     @Override
     public void draw(Canvas canvas) {
+        circlePaint.setColor(solidColor);
+        strokePaint.setColor(strokeColor);
+
 
         int h = this.getHeight();
         int w = this.getWidth();
@@ -60,10 +67,11 @@ public class CircularTextView extends TextView {
 
     public void setStrokeColor(String color) {
         strokeColor = Color.parseColor(color);
+//        invalidate();
     }
 
     public void setSolidColor(String color) {
         solidColor = Color.parseColor(color);
-
+//        invalidate();
     }
 }

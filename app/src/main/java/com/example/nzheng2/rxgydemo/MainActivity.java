@@ -1,12 +1,18 @@
 package com.example.nzheng2.rxgydemo;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,10 +29,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        View medelView = getLayoutInflater().inflate(R.layout.medal_view, null);
+//        View medelView1 = getMedalView(3);
+//        View medelView2 = getMedalView(3);
+//        View medelView3 = getMedalView(3);
+//        View medelView4 = getMedalView(3);
 
-        llBadgeContainer.addView(medelView);
-        bindData(ModelManager.providePayload());
+//        llBadgeContainer.addView(medelView1);
+//        llBadgeContainer.addView(medelView2);
+//        llBadgeContainer.addView(medelView3);
+//        llBadgeContainer.addView(medelView4);
+        TieredLandingPagePayload tieredLandingPagePayload = ModelManager.providePayload();
+        bindData(tieredLandingPagePayload);
+
+
+    }
+
+    private View getMedalView(int count) {
+        View view = getLayoutInflater().inflate(R.layout.medal_view, null);
+        ProgressBar progressBar = view.findViewById(R.id.pb);
+        resetConnectorSize(progressBar, count);
+        return view;
+    }
+
+    private void resetConnectorSize(ProgressBar progressBar, int count) {
+        if(count == 0) return;
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) progressBar.getLayoutParams();
+        if (count == 1){
+            layoutParams.width = displayMetrics.widthPixels;
+            layoutParams.height *= 2;
+        }else {
+            layoutParams.width = displayMetrics.widthPixels / (count+1);
+        }
+        progressBar.setLayoutParams(layoutParams);
     }
 
     private void initView() {
@@ -39,7 +74,22 @@ public class MainActivity extends AppCompatActivity {
         llBadgeContainer = findViewById(R.id.ll_badge_container);
     }
 
-    private void bindData(TieredLandingPagePayload tieredLandingPagePayload) {
+    private void bindData(TieredLandingPagePayload payload) {
+        leftHeadText.setText(payload.cardLeftHeadText);
+        rightHeadText.setText(payload.cardRightHeadText);
+        cardDesc.setText(payload.cardDescriptionText);
+        titleOfExplanation.setText(payload.titleOfExplaination);
+        tvCTA.setText(payload.ctaText);
 
+        List<TieredLandingPagePayload.TierBadgeInfo> feedTierList = payload.feedTierList;
+        for(TieredLandingPagePayload.TierBadgeInfo badgeInfo: feedTierList){
+            llBadgeContainer.addView(getMedalView(feedTierList.size()));
+        }
+
+        RvAdapter rvAdapter = new RvAdapter();
+        rvAdapter.setData(payload.explainations);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        rv.setLayoutManager(manager);
+        rv.setAdapter(rvAdapter);
     }
 }

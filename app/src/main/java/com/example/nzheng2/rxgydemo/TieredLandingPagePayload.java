@@ -18,7 +18,7 @@ class TieredLandingPagePayload {
         this.titleOfExplaination = titleOfExplaination;
         this.feedTierList = feedTierList;
         this.explainations = explainations;
-        CtaText = ctaText;
+        this.ctaText = ctaText;
     }
 
     // inside card
@@ -30,7 +30,7 @@ class TieredLandingPagePayload {
     List<TierBadgeInfo> feedTierList;
     List<Explaination> explainations;
     // CTA
-    String CtaText;
+    String ctaText;
 
     static class TierBadgeInfo {
         int progress;
