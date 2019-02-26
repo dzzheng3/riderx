@@ -22,11 +22,11 @@ public class ModelManager {
         List<TieredLandingPagePayload.Explaination> explainations = new ArrayList<>();
         explainations.add(e1);
         explainations.add(e2);
-        explainations.add(e3);
-        explainations.add(e3);
-        explainations.add(e3);
-        explainations.add(e3);
-        explainations.add(e3);
+//        explainations.add(e3);
+//        explainations.add(e3);
+//        explainations.add(e3);
+//        explainations.add(e3);
+//        explainations.add(e3);
         List<TieredLandingPagePayload.TierBadgeInfo> badgeInfos = new ArrayList<>();
         badgeInfos.add(b1);
         badgeInfos.add(b2);
